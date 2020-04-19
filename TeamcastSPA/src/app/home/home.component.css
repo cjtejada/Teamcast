@@ -1,0 +1,46 @@
+.home-spacer {
+  flex: 1 1 auto;
+}
+
+.row{
+  width: 50%;
+}
+
+.home-container{
+  margin: 0 auto;
+  margin-top: 1px;
+  width: 1250px;
+  height: 83%;
+}
+
+.map-col{
+  float: right;
+  height: 100%;
+}
+
+.map-card{
+  margin-top: 10px;
+  height: 100%;
+  width: 628px;
+}
+
+.event-col{
+  float: left;
+}
+
+.event-viewport{
+  height: 85vh;
+  width: 628px;
+}
+
+::-webkit-scrollbar{
+  width: 3px;
+  background-color: lightgrey;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color: purple;
+  border-radius: 100px;
+}
+

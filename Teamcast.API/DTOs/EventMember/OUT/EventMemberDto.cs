@@ -13,6 +13,6 @@ namespace Teamcast.DTOs
         public string Role { get; set; }
         public DateTime DateJoined { get; set; }
         public UserDto User { get; set; }
-        public TeamDto Teams { get; set; }
+        public TeamDto Team { get; set; }
     }
 }

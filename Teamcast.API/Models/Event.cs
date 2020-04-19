@@ -22,18 +22,17 @@ namespace Teamcast.Models
         public string Description { get; set; }
         public Point Location { get; set; }
         [Required]
-        public int CategoryType { get; set; }
+        public sbyte CategoryType { get; set; }
         [Required]
         public DateTime StartDateTime { get; set; }
         [Required]
         public DateTime EndDateTime { get; set; }
         [Required]
-        public int MinMembers { get; set; }
+        public sbyte MaxMembers { get; set; }
         [Required]
-        public int MaxMembers { get; set; }
-        [Required]
-        public int CompensationType { get; set; }
+        public sbyte CompensationType { get; set; }
         public float MoneyCompensationAmount { get; set; }
+        public sbyte MoneyCompensationRate { get; set; }
         public string OtherCompensationDescription { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdated { get; set; }

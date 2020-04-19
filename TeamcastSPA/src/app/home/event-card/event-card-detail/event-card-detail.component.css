@@ -1,0 +1,186 @@
+.detail-card{
+  background-color: #ebebeb;
+}
+
+.left-col{
+  float: left;
+}
+
+.right-col{
+  float: right;
+}
+
+.event-card{
+  height: 750px;
+  width: 465px;
+}
+
+.poster-card{
+  height: 150px;
+  width: 465px;
+  padding: 0px;
+  background-color: whitesmoke;
+}
+
+.map-card{
+  margin-top: 20px;
+  height: 580px;
+  width: 465px;
+}
+
+.exit-btn{
+  position: absolute;
+  margin-top: -40px;
+  margin-left: 950px;
+  background-color: darkorange;
+}
+
+.event-title{
+  border: 1px white solid;
+  font-size: 25px;
+  font-weight: lighter;
+  box-shadow: 0px 5px 5px lightgray;
+  border-radius: 3px;
+}
+
+.event-desc{
+  padding: 10px;
+  border: 1px white solid;
+  font-size: 15px;
+  font-weight: lighter;
+  box-shadow: 0px 5px 5px lightgray;
+  border-radius: 3px;
+  margin-top: 20px;
+  height: 205px;
+}
+
+.date-container{
+  padding: 20px;
+  font-weight: lighter;
+}
+
+.date-container{
+  padding: 10px;
+  font-size: 15px;
+  font-weight: lighter;
+  box-shadow: 0px 5px 5px lightgray;
+  border-radius: 3px;
+  margin-top: 20px;
+  height: 90px;
+  font-size: 18px;
+}
+
+.event-members{
+  border: 1px white solid;
+  font-size: 15px;
+  font-weight: lighter;
+  box-shadow: 0px 5px 5px lightgray;
+  border-radius: 3px;
+  margin-top: 20px;
+  height: 350px;
+}
+
+.event-view{
+  font-weight: lighter;
+  height: 320px;
+  border-radius: 3px;
+  margin: 0 auto;
+  margin-left: 3px;
+  padding-top: 10px;
+}
+
+.member-card{
+  height: 80px;
+  width: 400px;
+  margin-left: 20px;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0px 5px 5px lightgray;
+  margin-bottom: 10px;
+  background-color: whitesmoke;
+}
+
+.team-container{
+  width: 420px;
+  padding: 5px;
+  background-color: white;
+  margin-left: 10px;
+  border-radius: 3px;
+  box-shadow: 0px 5px 5px lightgray;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: rgb(255, 211, 98);
+}
+
+.team-member-card{
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 400px;
+  height: 80px;
+  background-color: white;
+  background-color: whitesmoke;
+  box-shadow: 0px 5px 5px lightgray;
+  border-radius: 3px;
+}
+
+.team-name{
+  color: black;
+  font-weight: lighter;
+  font-size: 15px;
+  padding: 15px;
+}
+
+.info{
+  float: left;
+  font-weight: lighter;
+  padding-top: 25px;
+  font-size: 25px;
+  margin-left: 25px;
+  position: absolute;
+}
+
+.photo{
+  float: right;
+  background-color: white;
+  width: 80px;
+  height: 80px;
+}
+
+.poster-photo{
+  float: right;
+  background-color: white;
+  margin: 20px;
+}
+
+.poster-name{
+  float: left;
+  margin-top: 45px;
+  margin-left: -180px;
+  font-size: 40px;
+}
+
+.leader-badge{
+  float: left;
+	width: 0;
+	height: 0;
+	border-left: 0px solid transparent;
+	border-right: 55px solid transparent;
+	border-top: 55px solid rgb(30, 161, 30);
+}
+
+.star{
+  color: gold;
+  position: absolute;
+  margin-top: -50px;
+  margin-left: 5px;
+}
+
+::-webkit-scrollbar{
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color: purple;
+  border-radius: 100px;
+}

@@ -27,11 +27,11 @@ namespace Teamcast.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryType")
-                        .HasColumnType("int");
+                    b.Property<short>("CategoryType")
+                        .HasColumnType("smallint");
 
-                    b.Property<int>("CompensationType")
-                        .HasColumnType("int");
+                    b.Property<short>("CompensationType")
+                        .HasColumnType("smallint");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -49,14 +49,14 @@ namespace Teamcast.Migrations
                     b.Property<Point>("Location")
                         .HasColumnType("geography");
 
-                    b.Property<int>("MaxMembers")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MinMembers")
-                        .HasColumnType("int");
+                    b.Property<short>("MaxMembers")
+                        .HasColumnType("smallint");
 
                     b.Property<float>("MoneyCompensationAmount")
                         .HasColumnType("real");
+
+                    b.Property<short>("MoneyCompensationRate")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -76,7 +76,7 @@ namespace Teamcast.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Events");
+                    b.ToTable("Event");
                 });
 
             modelBuilder.Entity("Teamcast.Models.EventMember", b =>
@@ -95,6 +95,9 @@ namespace Teamcast.Migrations
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("RoleDescription")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
@@ -109,7 +112,7 @@ namespace Teamcast.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("EventMembers");
+                    b.ToTable("EventMember");
                 });
 
             modelBuilder.Entity("Teamcast.Models.Team", b =>
@@ -142,7 +145,7 @@ namespace Teamcast.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Teams");
+                    b.ToTable("Team");
                 });
 
             modelBuilder.Entity("Teamcast.Models.TeamMember", b =>
@@ -158,6 +161,9 @@ namespace Teamcast.Migrations
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("RoleDescription")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
 
@@ -170,7 +176,7 @@ namespace Teamcast.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TeamMembers");
+                    b.ToTable("TeamMember");
                 });
 
             modelBuilder.Entity("Teamcast.Models.User", b =>
@@ -210,7 +216,7 @@ namespace Teamcast.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Teamcast.Models.Event", b =>
@@ -230,7 +236,7 @@ namespace Teamcast.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Teamcast.Models.Team", "Teams")
+                    b.HasOne("Teamcast.Models.Team", "Team")
                         .WithMany()
                         .HasForeignKey("TeamId");
 
@@ -251,7 +257,7 @@ namespace Teamcast.Migrations
             modelBuilder.Entity("Teamcast.Models.TeamMember", b =>
                 {
                     b.HasOne("Teamcast.Models.Team", null)
-                        .WithMany("TeamMembers")
+                        .WithMany("TeamMember")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

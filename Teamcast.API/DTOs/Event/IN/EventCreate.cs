@@ -15,18 +15,17 @@ namespace Teamcast.DTOs
         public string Description { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        public int Category { get; set; }
+        public sbyte CategoryType { get; set; }
         [Required]
         public DateTime StartDateTime { get; set; }
         [Required]
         public DateTime EndDateTime { get; set; }
         [Required]
-        public int MinUsersWanted { get; set; }
+        public sbyte MaxMembers { get; set; }
         [Required]
-        public int MaxUsersWanted { get; set; }
-        [Required]
-        public int Compensation { get; set; }
+        public sbyte CompensationType { get; set; }
         public float MoneyCompensationAmount { get; set; }
+        public sbyte MoneyCompensationRate { get; set; }
         public string OtherCompensationDescription { get; set; }
     }
 }

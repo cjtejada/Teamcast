@@ -1,0 +1,86 @@
+.event-card{
+  height: 150px;
+  width: 600px;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.title-card{
+  height: 35px;
+  font-weight: lighter;
+  padding-top: 0px;
+}
+
+.event-title{
+  font-size: 22px;
+}
+
+.desc-card{
+  height: 75px;
+  padding-top: 10px;
+  margin-top: 5px;
+  font-weight: lighter;
+
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-image: linear-gradient(to bottom right, #c2c2c2 1%, transparent 50%);
+  border-image-slice: 1;
+  border-radius: 5px;
+}
+
+.event-desc{
+  padding-left: 10px;
+
+}
+
+.title-icons{
+  float: right;
+  padding-right: 10px;
+}
+
+.title-icon-text{
+  float: right;
+  margin-top: 8px;
+  margin-left: -10px;
+}
+
+.rate{
+  float: right;
+}
+
+.title-icon{
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.desc-icons{
+  height: 35px;
+  margin-top: -15px;
+  background-color: white;
+  padding-top: 5px;
+  float: right;
+  background-color: transparent;
+}
+
+.desc-icon{
+  float: left;
+  margin-top: 1px;
+}
+
+.desc-icon-text{
+  float: left;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.vol-icon{
+  font-size: 36px;
+  margin-right: 10px;
+}
+
+
+
+

@@ -33,7 +33,7 @@ namespace Teamcast.Repos
         public async Task<User> Login(string username, string password)
         {
             //Retrieve the user that matches the given user name and password
-            var repoUser = await _dbContext.Users.FirstOrDefaultAsync(x => x.Username == username.ToLower()); ;
+            var repoUser = await _dbContext.User.FirstOrDefaultAsync(x => x.Username == username.ToLower()); ;
 
             //If this user does not exist, return NULL
             if (repoUser == null || !Check(repoUser.Password, password))
@@ -41,7 +41,7 @@ namespace Teamcast.Repos
 
             repoUser.LastActive = DateTime.Now;
 
-            _dbContext.Users.Update(repoUser);
+            _dbContext.User.Update(repoUser);
             await SaveChanges();
 
             repoUser.Token = GenerateToken(repoUser);
@@ -53,7 +53,7 @@ namespace Teamcast.Repos
         {
             user.Password = Hash(user.Password);
 
-            await _dbContext.Users.AddAsync(user);
+            await _dbContext.User.AddAsync(user);
             await SaveChanges();
 
             return user;
@@ -61,7 +61,7 @@ namespace Teamcast.Repos
 
         public async Task<User> GetUser(int userId)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _dbContext.User.FirstOrDefaultAsync(u => u.Id == userId);
 
             return user;
         }
@@ -113,7 +113,7 @@ namespace Teamcast.Repos
 
         public async Task<bool> UserExists(string username)
         {
-            if (!await _dbContext.Users.AnyAsync(x => x.Username == username))
+            if (!await _dbContext.User.AnyAsync(x => x.Username == username))
                 return false;
 
             return true;
@@ -121,10 +121,10 @@ namespace Teamcast.Repos
 
         public async Task<bool> DeleteUser(User user)
         {
-            _dbContext.Users.Remove(user);
+            _dbContext.User.Remove(user);
 
-            var _event = _dbContext.Events.Where(e => e.User.Id == user.Id).ToList();
-            var _team = _dbContext.Teams.Where(t => t.UserId == user.Id).ToList();
+            var _event = _dbContext.Event.Where(e => e.User.Id == user.Id).ToList();
+            var _team = _dbContext.Team.Where(t => t.UserId == user.Id).ToList();
 
             if (_event.Count() > 0)
             {
@@ -140,7 +140,7 @@ namespace Teamcast.Repos
                 {
                     _dbContext.Remove(t);
 
-                    var _teamMem = _dbContext.TeamMembers
+                    var _teamMem = _dbContext.TeamMember
                         .Where(tm => tm.TeamId == t.Id).ToList();
 
                     if (_teamMem.Count > 0)

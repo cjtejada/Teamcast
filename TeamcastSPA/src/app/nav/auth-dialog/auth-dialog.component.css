@@ -1,0 +1,48 @@
+.title{
+  font-size: 20px;
+  margin-right: 6px;
+}
+
+.auth-icon{
+  position: absolute;
+  margin-top: 2px;
+}
+
+.login-form{
+  margin-top: 20px;
+}
+
+.reg-form{
+  margin-top: 20px;
+}
+
+.reg-fields{
+  margin-left: 50px;
+}
+
+.signin-btn{
+  background-color: lawngreen;
+  margin-top: 1px;
+  float: right;
+  height: 50px;
+  width: 90px;
+}
+
+.dialog-footer-row{
+  margin-top: 20px;
+}
+
+.cancel-btn{
+  margin-top: 1px;
+  float: left;
+  height: 40px;
+  width: 90px;
+}
+
+.register-btn{
+  background-color: lawngreen;
+  margin-top: 1px;
+  float: right;
+  height: 40px;
+  width: 90px;
+}

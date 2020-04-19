@@ -14,8 +14,9 @@ namespace Teamcast.Models
         public int? TeamId { get; set; }
         public DateTime DateJoined { get; set; }
         public string Role { get; set; }
+        public string RoleDescription { get; set; }
         public User User { get; set; }
-        public Team Teams { get; set; }
+        public Team Team { get; set; }
         public EventMember()
         {
             DateJoined = DateTime.Now;

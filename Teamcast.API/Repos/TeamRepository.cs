@@ -18,30 +18,28 @@ namespace Teamcast.Repos
         }
         public async Task<bool> CreateTeam(int userId, Team team)
         {
-            //team.User = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
-
-            await _dbContext.Teams.AddAsync(team);
+            await _dbContext.Team.AddAsync(team);
 
             return await SaveChanges();
         }
 
         public async Task<bool> DeleteTeam(Team team)
         {
-            var eventMem = await _dbContext.EventMembers
+            var eventMem = await _dbContext.EventMember
                 .FirstOrDefaultAsync(t => t.TeamId == team.Id);
 
             if (eventMem != null)
-                _dbContext.EventMembers.Remove(eventMem);
+                _dbContext.EventMember.Remove(eventMem);
 
-            _dbContext.Teams.Remove(team);
+            _dbContext.Team.Remove(team);
 
             return await SaveChanges();
         }
 
         public async Task<Team> GetTeam(int id)
         {
-            return await _dbContext.Teams
-                .Include(t => t.TeamMembers)
+            return await _dbContext.Team
+                .Include(t => t.TeamMember)
                 .ThenInclude(tm => tm.User)
                 .Include(t => t.User)
                 .FirstOrDefaultAsync(t => t.Id == id);
@@ -49,8 +47,8 @@ namespace Teamcast.Repos
 
         public async Task<List<Team>> GetTeams()
         {
-            return await _dbContext.Teams
-                .Include(t => t.TeamMembers)
+            return await _dbContext.Team
+                .Include(t => t.TeamMember)
                 .ThenInclude(tm => tm.User)
                 .Include(t => t.User)
                 .OrderBy(t => t.Id).ToListAsync();
@@ -58,7 +56,7 @@ namespace Teamcast.Repos
 
         public async Task<bool> IsTeamMember(int userId, int teamId)
         {
-            if (await _dbContext.TeamMembers.AnyAsync(x => x.UserId == userId && x.TeamId == teamId))
+            if (await _dbContext.TeamMember.AnyAsync(x => x.UserId == userId && x.TeamId == teamId))
                 return true;
 
             return false;
@@ -85,7 +83,7 @@ namespace Teamcast.Repos
 
         public async Task<bool> TeamExists(int teamId)
         {
-            if (await _dbContext.Teams.AnyAsync(e => e.Id == teamId))
+            if (await _dbContext.Team.AnyAsync(e => e.Id == teamId))
                 return true;
 
             return false;
@@ -93,7 +91,7 @@ namespace Teamcast.Repos
 
         public async Task<bool> UserIdExists(int userId)
         {
-            if (!await _dbContext.Users.AnyAsync(x => x.Id == userId))
+            if (!await _dbContext.User.AnyAsync(x => x.Id == userId))
                 return false;
 
             return true;
@@ -101,7 +99,7 @@ namespace Teamcast.Repos
 
         public async Task<bool> IsTeamOwner(int userId)
         {
-            if (!await _dbContext.Teams.AnyAsync(x => x.UserId == userId))
+            if (!await _dbContext.Team.AnyAsync(x => x.UserId == userId))
                 return false;
 
             return true;

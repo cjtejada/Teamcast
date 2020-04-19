@@ -1,0 +1,115 @@
+<div class="detail-card">
+  <div class="left-col">
+    <button mat-mini-fab class="exit-btn" (click)="closeEventDetail()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="event-container">
+      <div class="event-card">
+        <div class="event-title">
+          <div style="float: left; padding-right: 15px;" [ngSwitch]="event.categoryType">
+            <mat-icon style="font-size: 40px;" *ngSwitchCase="1">work</mat-icon>
+            <mat-icon style="font-size: 40px;" *ngSwitchCase="2">emoji_people</mat-icon>
+          </div>
+          <div style="margin-top: 5px;"><span style="margin-left: 5px;">{{ event.name }}</span></div>
+        </div>
+
+        <cdk-virtual-scroll-viewport class="event-desc" itemSize="150">
+          <div style="margin: 10px;">
+            <div class="desc-content">{{ event.description }}</div>
+          </div>
+        </cdk-virtual-scroll-viewport>
+
+        <div class="date-container">
+          <div class="start-date">
+            <div class="start-date-label" style="color: black;">
+              This event starts <div style="color: goldenrod;">{{ event.startDateTime | date:'fullDate' }} at
+                {{ event.startDateTime | date:'shortTime'  }}</div>
+            </div>
+          </div>
+          <div class="end-date">
+            <div class="end-date-label" style="font-size: 15px;margin-top: 5px; color: black;">Expires
+              {{ event.endDateTime | date:'fullDate' }} at {{ event.endDateTime | date:'shortTime'  }}</div>
+          </div>
+        </div>
+
+        <div class="event-members" >
+          <div style="font-size: 20px; font-weight: lighter; padding-left: 5px;">Current Members</div>
+          <cdk-virtual-scroll-viewport class="event-view" itemSize="200">
+
+            <div style="margin: 25%;" *ngIf="hasMembers == false">This event has no memebers...</div>
+
+            <div style="margin: 5px;">
+
+              <div class="member-card" *ngFor="let user of users">
+
+                <div style="float: left;width: 50px;height: 50px;"></div>
+
+                <div class="info">
+                  <div class="fullname">{{ user.name }} {{ user.lastname }}</div>
+                </div>
+
+                <div class="photo"><img style="height: 80px; width: 80px;"
+                    src="https://cdn1.iconfinder.com/data/icons/mobile-application-essentials-2/100/profil-512.png"
+                    alt=""></div>
+
+              </div>
+
+              <div *ngFor="let team of teams">
+
+                <div *ngIf="teams.length > 0" class="team-container">
+
+                  <div class="team-name"> {{ team.teamName }} </div>
+
+                  <div class="team-member-card" *ngFor="let user of team.teammate">
+
+                    <div *ngIf="teamUsers.indexOf(user) == 0; else elseBlock" class="leader-badge">
+                      <mat-icon class="star">star</mat-icon>
+                    </div>
+                    <ng-template #elseBlock>
+                      <div style="float: left;width: 50px;height: 50px;"></div>
+                    </ng-template>
+
+                    <div class="info">
+                      <div class="fullname">{{ user.name }} {{ user.lastname }}</div>
+                    </div>
+
+                    <div class="photo"><img style="height: 80px; width: 80px;"
+                        src="https://cdn1.iconfinder.com/data/icons/mobile-application-essentials-2/100/profil-512.png"
+                        alt=""></div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div class="right-col">
+    <div class="user-container">
+      <mat-card class="poster-card">
+        <div class="div">
+          <div style="float: left; font-size: 16px; margin: 15px;">Posted {{ event.createdDate | date }} by </div>
+        </div>
+
+        <div class="poster-name">{{ event.eventOwner.name }} {{ event.eventOwner.lastname }}</div>
+        <div style="margin-top: 95px; float: left; margin-left: -173px; font-size: 16px;">{{ event.eventOwner.age }}</div>
+        <div class="poster-photo"><img style="height: 110px; width: 110px;"
+            src="https://cdn1.iconfinder.com/data/icons/mobile-application-essentials-2/100/profil-512.png" alt="">
+        </div>
+      </mat-card>
+    </div>
+    <div class="map-container">
+      <mat-card class="map-card">
+        <app-map-card></app-map-card>
+      </mat-card>
+    </div>
+  </div>
+</div>

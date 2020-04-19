@@ -12,6 +12,7 @@ namespace Teamcast.Models
         public int UserId { get; set; }
         public int TeamId { get; set; }
         public string Role { get; set; }
+        public string RoleDescription { get; set; }
         public DateTime DateJoined { get; set; }
         public User User { get; set; }
         public TeamMember()

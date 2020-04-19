@@ -30,26 +30,26 @@ namespace Teamcast.Repos
 
             //Get user events
             if (sort == "desc" && userId != 0 && search == null)
-                events = await _eventContext.Events
+                events = await _eventContext.Event
                         .Include(e => e.User)
                         .Include(e => e.EventMember)
                         .ThenInclude(em => em.User)
                         .Include(e => e.EventMember)
-                        .ThenInclude(em => em.Teams)
-                        .ThenInclude(t => t.TeamMembers)
+                        .ThenInclude(em => em.Team)
+                        .ThenInclude(t => t.TeamMember)
                         .ThenInclude(tm => tm.User)
                         .Where(e => e.UserId == userId 
                         && e.Location.Distance(location) <= radius)
                         .OrderByDescending(e => e.CreatedDate)
                         .ToListAsync();
             else if (sort == "asc" && userId != 0 && search == null)
-                events = await _eventContext.Events
+                events = await _eventContext.Event
                         .Include(e => e.User)
                         .Include(e => e.EventMember)
                         .ThenInclude(em => em.User)
                         .Include(e => e.EventMember)
-                        .ThenInclude(em => em.Teams)
-                        .ThenInclude(t => t.TeamMembers)
+                        .ThenInclude(em => em.Team)
+                        .ThenInclude(t => t.TeamMember)
                         .ThenInclude(tm => tm.User)
                         .Where(e => e.UserId == userId 
                         && e.Location.Distance(location) <= radius)
@@ -57,13 +57,13 @@ namespace Teamcast.Repos
                         .ToListAsync();
             //Search user events
             else if (sort == "desc" && userId == 0 && search != null)
-                events = await _eventContext.Events
+                events = await _eventContext.Event
                         .Include(e => e.User)
                         .Include(e => e.EventMember)
                         .ThenInclude(em => em.User)
                         .Include(e => e.EventMember)
-                        .ThenInclude(em => em.Teams)
-                        .ThenInclude(t => t.TeamMembers)
+                        .ThenInclude(em => em.Team)
+                        .ThenInclude(t => t.TeamMember)
                         .ThenInclude(tm => tm.User)
                         .Where(e => e.UserId == userId 
                         && (e.Name.Contains(search) 
@@ -72,13 +72,13 @@ namespace Teamcast.Repos
                         .ToListAsync();
             //Search all near events
             else if (userId == 0 && search != null && lat != 0 && lon != 0)
-                events = await _eventContext.Events
+                events = await _eventContext.Event
                         .Include(e => e.User)
                         .Include(e => e.EventMember)
                         .ThenInclude(em => em.User)
                         .Include(e => e.EventMember)
-                        .ThenInclude(em => em.Teams)
-                        .ThenInclude(t => t.TeamMembers)
+                        .ThenInclude(em => em.Team)
+                        .ThenInclude(t => t.TeamMember)
                         .ThenInclude(tm => tm.User)
                         .Where(e => e.Name.Contains(search)
                         || e.Description.Contains(search)
@@ -86,24 +86,24 @@ namespace Teamcast.Repos
                         .ToListAsync();
             //Get nearest event
             else if (userId == 0 && search == null && lat != 0 && lon != 0)
-                events = await _eventContext.Events
+                events = await _eventContext.Event
                         .Include(e => e.User)
                         .Include(e => e.EventMember)
                         .ThenInclude(em => em.User)
                         .Include(e => e.EventMember)
-                        .ThenInclude(em => em.Teams)
-                        .ThenInclude(t => t.TeamMembers)
+                        .ThenInclude(em => em.Team)
+                        .ThenInclude(t => t.TeamMember)
                         .ThenInclude(tm => tm.User)
                         .Where(e => e.Location.Distance(location) <= radius)
                         .ToListAsync();
             else
-                events = await _eventContext.Events
+                events = await _eventContext.Event
                         .Include(e => e.User)
                         .Include(e => e.EventMember)
                         .ThenInclude(em => em.User)
                         .Include(e => e.EventMember)
-                        .ThenInclude(em => em.Teams)
-                        .ThenInclude(t => t.TeamMembers)
+                        .ThenInclude(em => em.Team)
+                        .ThenInclude(t => t.TeamMember)
                         .ThenInclude(tm => tm.User)
                         .OrderBy(e => e.Id)
                         .ToListAsync();
@@ -114,13 +114,13 @@ namespace Teamcast.Repos
 
         public async Task<Event> GetEvent(int id)
         {
-            return await _eventContext.Events
+            return await _eventContext.Event
                 .Include(e => e.User)
                 .Include(e => e.EventMember)
                 .ThenInclude(em => em.User)
                 .Include(e => e.EventMember)
-                .ThenInclude(em => em.Teams)
-                .ThenInclude(t => t.TeamMembers)
+                .ThenInclude(em => em.Team)
+                .ThenInclude(t => t.TeamMember)
                 .ThenInclude(tm => tm.User)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
@@ -134,23 +134,23 @@ namespace Teamcast.Repos
 
         public async Task<bool> CreateEvent(int userId, Event ev)
         {
-            ev.User = await _eventContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            ev.User = await _eventContext.User.FirstOrDefaultAsync(u => u.Id == userId);
 
-            await _eventContext.Events.AddAsync(ev);
+            await _eventContext.Event.AddAsync(ev);
 
             return await SaveChanges();
         }
 
         public async Task<bool> DeleteEvent(Event ev)
         {
-            _eventContext.Events.Remove(ev);
+            _eventContext.Event.Remove(ev);
 
             return await SaveChanges();
         }
 
         public async Task<bool> EventExists(int eventId)
         {
-            if (await _eventContext.Events.AnyAsync(e => e.Id == eventId))
+            if (await _eventContext.Event.AnyAsync(e => e.Id == eventId))
                 return true;
 
             return false;
@@ -158,7 +158,7 @@ namespace Teamcast.Repos
 
         public async Task<bool> UserIdExists(int userId)
         {
-            if (!await _eventContext.Users.AnyAsync(x => x.Id == userId))
+            if (!await _eventContext.User.AnyAsync(x => x.Id == userId))
                 return false;
 
             return true;
@@ -166,7 +166,7 @@ namespace Teamcast.Repos
 
         public async Task<bool> IsEventMember(int userId, int eventId)
         {
-            if (await _eventContext.EventMembers.AnyAsync(x => x.UserId == userId && x.EventId == eventId))
+            if (await _eventContext.EventMember.AnyAsync(x => x.UserId == userId && x.EventId == eventId))
                 return true;
 
             return false;

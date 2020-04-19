@@ -1,0 +1,33 @@
+<mat-card class="event-card" [class.mat-elevation-z8]="true">
+  <div class="title-card">
+    <span class="event-title">{{ event.name }}</span>
+    <div class="title-icons" [ngSwitch]="event.categoryType">
+      <mat-icon class="title-icon" *ngSwitchCase="1">work</mat-icon>
+      <mat-icon class="title-icon" *ngSwitchCase="2" class="vol-icon">emoji_people</mat-icon>
+      <mat-icon class="title-icon" *ngIf="event.compensationType == 1" style="color: green;">attach_money</mat-icon>
+      <div *ngSwitchDefault></div>
+      <div *ngIf="event.compensationType == 1" class="title-icon-text">{{ event.moneyCompensationAmount }}
+        <div class="rate" [ngSwitch]="event.moneyCompensationRate">
+          <div *ngSwitchCase="1">/hour</div>
+          <div *ngSwitchCase="2">/day</div>
+          <div *ngSwitchCase="3">/Completion</div>
+          <div *ngSwitchCase="0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="desc-card">
+    <div class="event-desc">{{ event.description }}</div>
+  </div>
+  <div class="desc-icons">
+    <mat-icon class="desc-icon" style="margin-right: 3px;">people</mat-icon>
+    <div class="desc-icon-text">{{ memberCount }}/{{ event.maxMembers }} members</div>
+    <mat-icon class="desc-icon" style="margin-right: 3px;">today</mat-icon>
+    <div class="desc-icon-text">{{ event.startDateTime | date: 'MM/dd/yy'}} at {{ event.startDateTime | date: 'HH:MM'}}
+    </div>
+    <div *ngIf="isLocationProvided" style="float: right;">
+    <mat-icon class="desc-icon">location_on</mat-icon>
+    <div class="desc-icon-text">{{ 5 }} miles away</div>
+  </div>
+  </div>
+</mat-card>

@@ -1,0 +1,97 @@
+<div class="dialog">
+
+  <div class="login">
+    <span class="title">Sing in</span>
+    <mat-icon class="auth-icon">vpn_key</mat-icon>
+
+    <form mat-form-field-control class="login-form">
+
+      <mat-form-field appearance="fill" class="username">
+        <mat-label>Enter your username</mat-label>
+        <input matInput>
+        <mat-icon matSuffix>verified_user</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="password">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hideLogin ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hideLogin = !hideLogin" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide" style="width: 25px;" type="button">
+          <mat-icon>{{hideLogin ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-raised-button class="signin-btn">Sign in</button>
+    </form>
+  </div>
+
+  <mat-divider style="margin-top: 20px;"></mat-divider>
+  <mat-divider style="margin-bottom: 20px;"></mat-divider>
+
+  <div class="register">
+    <span class="title">Register</span>
+    <mat-icon class="auth-icon">how_to_reg</mat-icon>
+
+    <form class="reg-form">
+
+      <div class="reg-fields">
+
+        <div class="reg-user-row">
+          <mat-form-field appearance="fill" class="reg-left-row">
+            <mat-label>Enter your username</mat-label>
+            <input matInput>
+            <mat-icon matSuffix>verified_user</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="reg-right-row">
+            <mat-label>Enter your email</mat-label>
+            <input matInput type="email">
+            <mat-icon matSuffix>alternate_email</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="reg-name-row">
+          <mat-form-field appearance="fill" class="reg-left-row">
+            <mat-label>Enter your name</mat-label>
+            <input matInput>
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="reg-right-row">
+            <mat-label>Enter your last name</mat-label>
+            <input matInput type="email">
+            <mat-icon matSuffix>people_alt</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <div class="reg-pass-row">
+          <mat-form-field appearance="fill" class="reg-left-row">
+            <mat-label>Create a password</mat-label>
+            <input matInput [type]="hideReg ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hideReg = !hideReg" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hideReg" style="width: 25px;" type="button">
+              <mat-icon>{{hideReg ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="reg-right-row">
+            <mat-label>Confirm your password</mat-label>
+            <input matInput [type]="hideConfirm ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hideConfirm" style="width: 25px;" type="button">
+              <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="dialog-footer-row">
+        <button type="button" mat-raised-button class="cancel-btn" color="accent"
+          (click)="closeAuthDialog()">Cancel</button>
+        <button mat-raised-button class="register-btn">Register</button>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="home-container">
+
+  <div class="map-col">
+    <mat-card class="map-card" [class.mat-elevation-z8]="true">
+      <app-map-card></app-map-card>
+    </mat-card>
+  </div>
+
+  <div class="event-col">
+
+    <div class="row">
+      <cdk-virtual-scroll-viewport itemSize="150" class="event-viewport">
+
+        <div *ngIf="authService.isLoggedIn">
+          <app-event-card *ngFor="let event of events" [event]="event" (click)="openEventDetailDialog(event)"></app-event-card>
+        </div>
+
+        <div *ngIf="!authService.isLoggedIn">
+          <app-event-card *ngFor="let event of events" [event]="event" (click)="authService.launchAuthDialog()"></app-event-card>
+        </div>
+
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </div>
+
+</div>

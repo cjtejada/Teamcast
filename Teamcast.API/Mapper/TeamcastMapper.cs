@@ -35,15 +35,17 @@ namespace Teamcast.Mapper
                 .BeforeMap((src, dest) => dest.Age = CalculateAge(src.DateOfBirth));
             CreateMap<EventMember, EventMemberDto>()
                 .ForMember(dest => dest.User, opts => opts.Condition(src => {
-                    if (src.Teams == null)
+                    if (src.Team == null)
                         return true;
                     else
                         return false;
                 }))
-                .ForMember(dest => dest.Teams, opts => opts.MapFrom(src => src.Teams));
+                .ForMember(dest => dest.Team, opts => opts.MapFrom(src => src.Team));
             CreateMap<Event, EventDto>()
                 .ForMember(dest => dest.EventMember, opts => opts.MapFrom(src => src.EventMember))
-                .ForMember(dest => dest.EventOwner, opts => opts.MapFrom(src => src.User));
+                .ForMember(dest => dest.EventOwner, opts => opts.MapFrom(src => src.User))
+                .AfterMap((src, desc) => desc.Latitude = src.Location.Y)
+                .AfterMap((src, desc) => desc.Longitude = src.Location.X);
 
             //Team mappings
             CreateMap<Team, TeamCreate>().ReverseMap();
@@ -55,7 +57,7 @@ namespace Teamcast.Mapper
             CreateMap<TeamMember, TeamMemberDto>()
                 .ForMember(dest => dest.User, opts => opts.MapFrom(src => src.User));
             CreateMap<Team, TeamDto>()
-                .ForMember(dest => dest.TeamMembers, opts => opts.MapFrom(src => src.TeamMembers))
+                .ForMember(dest => dest.TeamMember, opts => opts.MapFrom(src => src.TeamMember))
                 .ForMember(dest => dest.User, opts => opts.MapFrom(src => src.User));
         }
 

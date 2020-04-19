@@ -54,7 +54,13 @@ namespace Teamcast.Controllers
 
             var userToReturn = _mapper.Map<UserDto>(user);
 
-            return Ok(userToReturn);
+            var loginCreds = new Login()
+            {
+                Username = userToCreate.Username,
+                Password = userToCreate.Password
+            };
+
+            return await Login(loginCreds);
         }
 
         [Authorize]

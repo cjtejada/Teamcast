@@ -18,7 +18,7 @@ namespace Teamcast.Repos
 
         public async Task<List<User>> GetUsers(string userSearch)
         {
-            return await _userContext.Users
+            return await _userContext.User
                 .Where(u => u.Name.Contains(userSearch) 
                 || u.Lastname.Contains(userSearch) 
                 || u.Username.Contains(userSearch))
@@ -27,7 +27,7 @@ namespace Teamcast.Repos
 
         public async Task<User> GetUser(int id)
         {
-            return await _userContext.Users
+            return await _userContext.User
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
@@ -38,7 +38,7 @@ namespace Teamcast.Repos
 
         public async Task<bool> UserIdExists(int userId)
         {
-            if (!await _userContext.Users.AnyAsync(x => x.Id == userId))
+            if (!await _userContext.User.AnyAsync(x => x.Id == userId))
                 return false;
 
             return true;

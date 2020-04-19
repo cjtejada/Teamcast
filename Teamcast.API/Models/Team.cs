@@ -17,7 +17,7 @@ namespace Teamcast.Models
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdated { get; set; }
         public User User { get; set; }
-        public ICollection<TeamMember> TeamMembers { get; set; }
+        public ICollection<TeamMember> TeamMember { get; set; }
         public Team()
         {
             CreatedDate = DateTime.Now;

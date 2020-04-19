@@ -110,6 +110,9 @@ namespace Teamcast.Controllers
             if (await _tRepo.IsTeamMember(userId, teamId))
                 return Unauthorized(new { message = "You're already part of this group" });
 
+            if (await _tRepo.IsTeamOwner(userId))
+                return Unauthorized(new { message = "You're already the owner of this team." });
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -136,7 +139,7 @@ namespace Teamcast.Controllers
                 return Unauthorized();
 
             if (!await _tRepo.IsTeamOwner(userId))
-                return Unauthorized(new { message = "User does not exist." });
+                return Unauthorized(new { message = "You're not the owner of this team." });
 
             if (!await _tRepo.TeamExists(teamId))
                 return BadRequest(new { message = "Team does not exist" });

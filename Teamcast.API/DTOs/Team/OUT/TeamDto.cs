@@ -15,6 +15,6 @@ namespace Teamcast.DTOs.Team.OUT
         public Uri TeamPhoto { get; set; }
         public DateTime CreatedDate { get; set; }
         public UserDto User { get; set; }
-        public ICollection<TeamMemberDto> TeamMembers { get; set; }
+        public ICollection<TeamMemberDto> TeamMember { get; set; }
     }
 }

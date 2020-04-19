@@ -1,0 +1,104 @@
+<mat-toolbar color="primary">
+  <div class="top-toolbar-container">
+
+    <div class="title-container-col">
+      <span class="nav-title">freelance caster</span>
+    </div>
+
+    <div class="auth-container-col">
+
+      <div *ngIf="!authService.isLoggedIn">
+        <a mat-button color="accent" (click)="authService.launchAuthDialog()">Sign in / Join</a>
+      </div>
+
+
+      <div *ngIf="authService.isLoggedIn">
+        <button mat-raised-button color="accent" class="create-event-btn" (click)="createEventDialog()">
+          <mat-icon class="add-icon">library_add</mat-icon> Create Event
+        </button>
+
+        <button mat-button [matMenuTriggerFor]="menu" class="user-menu">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" class="user-menu">
+          <button mat-menu-item class="menu-btn">
+            <mat-icon>person</mat-icon>
+            <span>Jon</span>
+          </button>
+          <button mat-menu-item class="menu-btn">
+            <mat-icon>today</mat-icon>
+            <span>My Events</span>
+          </button>
+          <button mat-menu-item class="menu-btn">
+            <mat-icon>people_alt</mat-icon>
+            <span>My Teams</span>
+          </button>
+          <button mat-menu-item class="menu-btn">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </div>
+
+    </div>
+
+  </div>
+</mat-toolbar>
+
+
+<mat-toolbar color="primary">
+
+  <div class="bottom-toolbar-container">
+
+    <form class="form-toolbar-col">
+      <mat-card class="search-card" [class.mat-elevation-z8]="true">
+        <div class="search-container-row">
+          <input class="search-input" placeholder="{{searchBarHint}}">
+          <button mat-icon-button matSuffix class="search-button">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </mat-card>
+
+      <div class="search-refiner-row">
+        <mat-form-field class="event-criteria" appearance="fill">
+          <mat-select [(value)]="searchValue">
+            <mat-option value="events" (click)="generateSearchHint()">Events</mat-option>
+            <mat-option value="teams" (click)="generateSearchHint()">Teams</mat-option>
+            <mat-option value="users" (click)="generateSearchHint()">Users</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-slider class="slider" thumbLabel tickInterval="1" min="1" max="100" [disabled]="IsDisabled()"></mat-slider>
+        <span class="slider-label">Radius / miles</span>
+
+        <mat-form-field class="event-criteria" appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select [disabled]="IsDisabled()">
+            <mat-option value="primary">Any</mat-option>
+            <mat-option value="accent">Job</mat-option>
+            <mat-option value="accent">Other</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="event-criteria" appearance="fill">
+          <mat-label>Compensation</mat-label>
+          <mat-select [disabled]="IsDisabled()">
+            <mat-option value="primary">Any</mat-option>
+            <mat-option value="accent">Money</mat-option>
+            <mat-option value="warn">Other</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="event-criteria">
+          <mat-label>Event key word...</mat-label>
+          <input matInput placeholder="Ex. Construction, mechanic, etc" [disabled]="IsDisabled()">
+          <mat-icon matSuffix>key</mat-icon>
+        </mat-form-field>
+      </div>
+
+    </form>
+
+  </div>
+
+</mat-toolbar>

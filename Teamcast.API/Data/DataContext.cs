@@ -11,10 +11,10 @@ namespace Teamcast.Data
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options){}
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Event> Events { get; set; }
-        public DbSet<EventMember> EventMembers { get; set; }
-        public DbSet<Team> Teams { get; set; }
-        public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Event> Event { get; set; }
+        public DbSet<EventMember> EventMember { get; set; }
+        public DbSet<Team> Team { get; set; }
+        public DbSet<TeamMember> TeamMember { get; set; }
     }
 }

@@ -27,19 +27,28 @@ namespace Teamcast.Controllers
 
         [Authorize]
         [HttpGet("[action]")]
-        public async Task<IActionResult> GetEvents(int? userId, int? pageNumber, int? pageSize, string sort, string search, double lat, double lon, double? radius)
+        public async Task<IActionResult> GetUserEvents(int userId, int? pageNumber, int? pageSize, string sort, string search, double lat, double lon, double? radius)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.Name)?.Value))
+                return Unauthorized();
+
+            return await GetEvents(userId, pageNumber, pageSize, sort,  search, lat, lon, radius);
+        }
+
+
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetEvents(int userId, int? pageNumber, int? pageSize, string sort, string search, double lat, double lon, double? radius)
         {
             var _pageNumber = pageNumber ?? 1;
-            var _pageSize = pageSize ?? 5;
-            var _userId = userId ?? 0;
+            var _pageSize = pageSize ?? 10;
             var _radius = radius ?? 40234;
 
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.Name)?.Value))
-                _userId = 0;
+            userId = 0;
 
             List<Event> eventsObj;
 
-            eventsObj = await _evRepo.GetEvents(_userId, sort, search, lat, lon, _radius);
+            eventsObj = await _evRepo.GetEvents(userId, sort, search, lat, lon, _radius);
 
             var eventObjList = _mapper.Map<List<EventDto>>
                 (eventsObj.Skip((_pageNumber - 1) * _pageSize).Take(_pageSize));
