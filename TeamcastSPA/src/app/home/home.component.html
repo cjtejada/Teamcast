@@ -8,7 +8,11 @@
 
   <div class="event-col">
 
-    <div class="row">
+    <div class="loading" *ngIf="isLoading" style="margin-top: 250px; margin-left:250px;">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <div *ngIf="!isLoading" class="row">
       <cdk-virtual-scroll-viewport itemSize="150" class="event-viewport">
 
         <div *ngIf="authService.isLoggedIn">

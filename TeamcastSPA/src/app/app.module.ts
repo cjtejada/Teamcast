@@ -27,10 +27,13 @@ import { EventCardDetailComponent } from "./home/event-card/event-card-detail/ev
 import { UserCompactComponent } from "./user/user-compact/user-compact.component";
 import { UserDetailComponent } from "./user/user-detail/user-detail.component";
 import { CreateEventDialogComponent } from "./nav/create-event-dialog/create-event-dialog.component";
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { EventService } from './services/event.service';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -69,9 +72,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatDialogModule,
     MatDividerModule,
     HttpClientModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    FormsModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [EventService, AuthService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

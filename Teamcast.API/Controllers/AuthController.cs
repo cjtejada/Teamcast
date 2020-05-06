@@ -32,7 +32,7 @@ namespace Teamcast.Controllers
             var user = await _userRepo.Login(_user.Username, _user.Password);
 
             if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect." });
+                return Unauthorized(new { message = "Username or password is incorrect." });
 
             var repoUser = _mapper.Map<UserDto>(user);
 

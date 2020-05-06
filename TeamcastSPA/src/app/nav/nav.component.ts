@@ -27,10 +27,6 @@ export class NavComponent implements OnInit {
 
   createEventDialog(){
     const dialogRef = this.dialog.open(CreateEventDialogComponent, {height: '800px', width: '600px'});
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-    })
   }
 
   IsDisabled(){
@@ -38,4 +34,7 @@ export class NavComponent implements OnInit {
       return true;
   }
 
+  onLogout(){
+    this.authService.isLoggedIn = false;
+  }
 }

@@ -1,20 +1,24 @@
+<div class="loading" *ngIf="isLoading" style="margin-top: 200px;">
+  <mat-spinner style="margin: 0px auto;"></mat-spinner>
+</div>
+
 <div class="dialog">
 
   <div class="login">
     <span class="title">Sing in</span>
     <mat-icon class="auth-icon">vpn_key</mat-icon>
 
-    <form mat-form-field-control class="login-form">
+    <form mat-form-field-control class="login-form" (ngSubmit)="onLogin()" #login="ngForm">
 
       <mat-form-field appearance="fill" class="username">
         <mat-label>Enter your username</mat-label>
-        <input matInput>
+        <input matInput ngModel name="username">
         <mat-icon matSuffix>verified_user</mat-icon>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="password">
         <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hideLogin ? 'password' : 'text'">
+        <input matInput ngModel name="password" [type]="hideLogin ? 'password' : 'text'">
         <button mat-icon-button matSuffix (click)="hideLogin = !hideLogin" [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide" style="width: 25px;" type="button">
           <mat-icon>{{hideLogin ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -32,20 +36,20 @@
     <span class="title">Register</span>
     <mat-icon class="auth-icon">how_to_reg</mat-icon>
 
-    <form class="reg-form">
+    <form class="reg-form" (ngSubmit)="onRegister()" #reg="ngForm">
 
       <div class="reg-fields">
 
         <div class="reg-user-row">
           <mat-form-field appearance="fill" class="reg-left-row">
             <mat-label>Enter your username</mat-label>
-            <input matInput>
+            <input matInput ngModel name="username">
             <mat-icon matSuffix>verified_user</mat-icon>
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="reg-right-row">
             <mat-label>Enter your email</mat-label>
-            <input matInput type="email">
+            <input matInput type="email" ngModel name="email" >
             <mat-icon matSuffix>alternate_email</mat-icon>
           </mat-form-field>
         </div>
@@ -53,13 +57,13 @@
         <div class="reg-name-row">
           <mat-form-field appearance="fill" class="reg-left-row">
             <mat-label>Enter your name</mat-label>
-            <input matInput>
+            <input matInput ngModel name="name" >
             <mat-icon matSuffix>person</mat-icon>
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="reg-right-row">
             <mat-label>Enter your last name</mat-label>
-            <input matInput type="email">
+            <input matInput ngModel name="lastname">
             <mat-icon matSuffix>people_alt</mat-icon>
           </mat-form-field>
         </div>
@@ -67,7 +71,7 @@
         <div class="reg-pass-row">
           <mat-form-field appearance="fill" class="reg-left-row">
             <mat-label>Create a password</mat-label>
-            <input matInput [type]="hideReg ? 'password' : 'text'">
+            <input matInput ngModel name="password" [type]="hideReg ? 'password' : 'text'">
             <button mat-icon-button matSuffix (click)="hideReg = !hideReg" [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hideReg" style="width: 25px;" type="button">
               <mat-icon>{{hideReg ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -89,7 +93,7 @@
       <div class="dialog-footer-row">
         <button type="button" mat-raised-button class="cancel-btn" color="accent"
           (click)="closeAuthDialog()">Cancel</button>
-        <button mat-raised-button class="register-btn">Register</button>
+        <button mat-raised-button type="submit" class="register-btn">Register</button>
       </div>
 
     </form>
